@@ -3,3 +3,19 @@ grafana:
   enabled: true
   admin:
     existingSecret: grafana-admin-credentials
+  ingress:
+    enabled: true
+    ingressClassName: traefik
+    hosts:
+      - grafana.local
+    paths:
+      - /
+
+prometheus:
+  ingress:
+    enabled: true
+    ingressClassName: traefik
+    hosts:
+      - prometheus.local
+    paths:
+      - /
