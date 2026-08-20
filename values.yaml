@@ -1,0 +1,3 @@
+# placeholder override to prove the values-file pipeline end-to-end
+grafana:
+  enabled: true
