@@ -11,6 +11,8 @@ grafana:
       parentRefs:
         - name: monitoring-gateway
           sectionName: grafana
+          group: gateway.networking.k8s.io
+          kind: Gateway
 
 prometheus:
   route:
@@ -21,3 +23,5 @@ prometheus:
       parentRefs:
         - name: monitoring-gateway
           sectionName: prometheus
+          group: gateway.networking.k8s.io
+          kind: Gateway
