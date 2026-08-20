@@ -15,6 +15,7 @@ spec:
           - $values/values.yaml
     - repoURL: https://github.com/delgadm/argocd.git
       targetRevision: main
+      path: prometheus
       ref: values
   destination:
     server: https://kubernetes.default.svc
