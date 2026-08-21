@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shoehub
+  labels:
+    app: shoehub
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shoehub
+  template:
+    metadata:
+      labels:
+        app: shoehub
+    spec:
+      containers:
+        - name: shoehub
+          image: aussiearef/shoehub:latest
+          ports:
+            - name: metrics
+              containerPort: 8080
