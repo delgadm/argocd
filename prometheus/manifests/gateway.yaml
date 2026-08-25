@@ -27,3 +27,10 @@ spec:
       allowedRoutes:
         namespaces:
           from: Same
+    - name: tempo
+      hostname: tempo.local
+      port: 8000
+      protocol: HTTP
+      allowedRoutes:
+        namespaces:
+          from: Same
