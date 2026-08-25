@@ -20,3 +20,10 @@ spec:
       allowedRoutes:
         namespaces:
           from: Same
+    - name: loki
+      hostname: loki.local
+      port: 8000
+      protocol: HTTP
+      allowedRoutes:
+        namespaces:
+          from: Same

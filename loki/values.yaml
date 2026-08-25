@@ -28,6 +28,18 @@ ignoreMinioDeprecation: true
 minio:
   enabled: true
 
+gateway:
+  route:
+    main:
+      enabled: true
+      hostnames:
+        - loki.local
+      parentRefs:
+        - name: monitoring-gateway
+          sectionName: loki
+          group: gateway.networking.k8s.io
+          kind: Gateway
+
 deploymentMode: Monolithic
 
 singleBinary:
