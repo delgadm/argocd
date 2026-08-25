@@ -5,6 +5,7 @@
 # That subchart is deprecated and scheduled for removal on 2026-10-31 -
 # swap loki.storage to an external S3-compatible bucket before then.
 loki:
+  auth_enabled: false
   commonConfig:
     replication_factor: 1
   schemaConfig:
