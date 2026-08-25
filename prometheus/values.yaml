@@ -3,6 +3,11 @@ grafana:
   enabled: true
   admin:
     existingSecret: grafana-admin-credentials
+  additionalDataSources:
+    - name: Loki
+      type: loki
+      access: proxy
+      url: http://loki-gateway.monitoring.svc.cluster.local
   route:
     main:
       enabled: true
