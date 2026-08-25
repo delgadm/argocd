@@ -28,6 +28,15 @@ ignoreMinioDeprecation: true
 minio:
   enabled: true
 
+# Defaults request ~9.8Gi (chunksCache) which exceeds this kind cluster's
+# per-node allocatable memory (~8Gi), leaving the pod permanently Pending
+# and blocking the rest of the sync behind it. Not needed for a single
+# low-volume log source.
+chunksCache:
+  enabled: false
+resultsCache:
+  enabled: false
+
 gateway:
   route:
     main:
