@@ -1,6 +1,17 @@
 # Single-binary Tempo (this chart is single-binary only), local disk storage.
 # No object storage/cache sizing concerns here (unlike Loki) - defaults are
 # already small enough for the kind cluster.
+tempo:
+  metricsGenerator:
+    enabled: true
+    remoteWriteUrl: "http://kube-prometheus-stack-prometheus.monitoring:9090/api/v1/write"
+  overrides:
+    defaults:
+      metrics_generator:
+        processors:
+          - service-graphs
+          - span-metrics
+
 route:
   main:
     enabled: true
