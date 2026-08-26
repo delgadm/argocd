@@ -35,6 +35,7 @@ prometheus:
           group: gateway.networking.k8s.io
           kind: Gateway
   prometheusSpec:
+    enableRemoteWriteReceiver: true
     additionalScrapeConfigs:
       - job_name: raspberry-pi-node-exporter
         static_configs:
