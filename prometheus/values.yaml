@@ -6,17 +6,19 @@ grafana:
   additionalDataSources:
     - name: Loki
       type: loki
-      uid: loki
       access: proxy
       url: http://loki-gateway.monitoring.svc.cluster.local
     - name: Tempo
       type: tempo
-      uid: tempo
       access: proxy
       url: http://tempo.monitoring.svc.cluster.local:3200
       jsonData:
+        # Loki's existing auto-provisioned uid (unset above) - changing an
+        # already-provisioned datasource's uid breaks Grafana's file-based
+        # provisioning reconcile ("data source not found" on reload), so we
+        # reference its current uid directly rather than pinning a new one.
         tracesToLogsV2:
-          datasourceUid: loki
+          datasourceUid: P8E80F9AEF21F6940
           spanStartTimeShift: "-1h"
           spanEndTimeShift: "1h"
           tags: ["job", "instance", "pod", "namespace"]
