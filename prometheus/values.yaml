@@ -6,12 +6,34 @@ grafana:
   additionalDataSources:
     - name: Loki
       type: loki
+      uid: loki
       access: proxy
       url: http://loki-gateway.monitoring.svc.cluster.local
     - name: Tempo
       type: tempo
+      uid: tempo
       access: proxy
       url: http://tempo.monitoring.svc.cluster.local:3200
+      jsonData:
+        tracesToLogsV2:
+          datasourceUid: loki
+          spanStartTimeShift: "-1h"
+          spanEndTimeShift: "1h"
+          tags: ["job", "instance", "pod", "namespace"]
+          filterByTraceID: false
+          filterBySpanID: false
+        tracesToMetrics:
+          datasourceUid: prometheus
+          spanStartTimeShift: "-1h"
+          spanEndTimeShift: "1h"
+          tags:
+            - key: service.name
+              value: service
+          queries:
+            - name: "Request rate"
+              query: 'sum(rate(traces_spanmetrics_calls_total{$$__tags}[5m]))'
+        serviceMap:
+          datasourceUid: prometheus
   route:
     main:
       enabled: true
