@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: unpoller
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: https://unpoller.github.io/helm-chart
+      chart: unpoller
+      targetRevision: "2.4.0"
+      helm:
+        releaseName: unpoller
+        valueFiles:
+          - $values/unpoller/values.yaml
+    - repoURL: https://github.com/delgadm/argocd.git
+      targetRevision: main
+      ref: values
+    - repoURL: https://github.com/delgadm/argocd.git
+      targetRevision: main
+      path: unpoller/manifests
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true

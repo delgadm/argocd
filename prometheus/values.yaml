@@ -60,6 +60,11 @@ prometheus:
           kind: Gateway
   prometheusSpec:
     enableRemoteWriteReceiver: true
+    # Accept PodMonitor/ServiceMonitor resources from charts that don't
+    # apply the "release: kube-prometheus-stack" label (e.g. unpoller),
+    # rather than only the ones this chart itself creates.
+    podMonitorSelectorNilUsesHelmValues: false
+    serviceMonitorSelectorNilUsesHelmValues: false
     additionalScrapeConfigs:
       - job_name: mac-studio-node-exporter
         static_configs:

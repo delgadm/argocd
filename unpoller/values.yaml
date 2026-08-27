@@ -1,0 +1,20 @@
+# Connection config (UniFi controller url/user/pass) lives in an
+# out-of-band Secret, not here - see the unpoller-up-config Secret,
+# created directly via kubectl rather than committed to git.
+upConfigExistingSecret:
+  name: unpoller-up-config
+  key: up.conf
+
+service:
+  enabled: true
+
+podMonitor:
+  enabled: true
+
+# Requires the grafana-operator CRDs, which aren't installed in this
+# cluster - dashboards are provisioned instead via plain ConfigMaps in
+# unpoller/manifests, matching the pattern used for Node Exporter Full.
+dashboards:
+  create: false
+  grafana:
+    create: false
